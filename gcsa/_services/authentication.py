@@ -99,7 +99,9 @@ class AuthenticatedService:
             else:
                 credentials_path = os.path.join(credentials_dir, credentials_file)
                 flow = InstalledAppFlow.from_client_secrets_file(credentials_path, scopes)
-                credentials = flow.run_local_server(host=host, port=port)
+                credentials = flow.run_local_server(bind_addr=host, host=host,
+                                                    port=port,
+                                                    open_browser=False)
 
             if save_token:
                 with open(token_path, 'wb') as token_file:
